@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">ChallengeApuestaTotal</string>
+    <string name="bet_id">Id apuesta</string>
+    <string name="bet">Apuesta</string>
+    <string name="total_share">Cuota total</string>
+    <string name="revenue">Ganancia</string>
+    <string name="date">date</string>
+    <string name="in_process">Procesando</string>
+    <string name="keyboard_arrow_down">arrow back</string>
+    <string name="see_more">Ver más</string>
+    <string name="go_back">go back</string>
+    <string name="bet_challenge">Bet Challenge</string>
+    <string name="search">Search</string>
+    <string name="label_type">Tipo de juego</string>
+    <string name="label_status">Status de apuesta</string>
+    <string name="keyboard_arrow_up">arrow up</string>
+    <string name="see_less">Ver menos</string>
+    <string name="search_bet">Encuentra tu apuesta</string>
+    <string name="close">Close</string>
+</resources>
