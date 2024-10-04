@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalFoundationApi::class)
 
-package com.github.juanncode.challengeapuestatotal.screens.components
+package com.github.juanncode.challengeapuestatotal.screens.home.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -23,7 +23,6 @@ import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -43,10 +42,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.github.juanncode.challengeapuestatotal.R
 import com.github.juanncode.challengeapuestatotal.ui.theme.ChallengeApuestaTotalTheme
-import com.github.juanncode.challengeapuestatotal.ui.theme.CheckIcon
 import com.github.juanncode.challengeapuestatotal.ui.theme.EmailIcon
 
 @Composable

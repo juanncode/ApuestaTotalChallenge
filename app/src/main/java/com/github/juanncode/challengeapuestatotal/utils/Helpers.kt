@@ -2,6 +2,7 @@ package com.github.juanncode.challengeapuestatotal.utils
 
 import androidx.compose.ui.graphics.Color
 import com.github.juanncode.challengeapuestatotal.ui.theme.BetBlue
+import com.github.juanncode.challengeapuestatotal.ui.theme.BetDarkRed
 import com.github.juanncode.challengeapuestatotal.ui.theme.BetGolden
 import com.github.juanncode.challengeapuestatotal.ui.theme.BetGray
 import com.github.juanncode.challengeapuestatotal.ui.theme.BetOrange
@@ -23,7 +24,7 @@ fun getColorByLevel(level: String): Color {
     return when (level) {
         "Donatelo" -> BetBlue
         "Capo" -> BetGolden
-        "Leyenda" -> BetRed
+        "Leyenda" -> BetDarkRed
         "King" -> BetSilver
         "Master" -> BetGray
         "Cazafijas" -> BetOrange

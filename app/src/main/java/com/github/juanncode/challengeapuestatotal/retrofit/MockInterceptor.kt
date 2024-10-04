@@ -16,6 +16,7 @@ class MockInterceptor(private val context: Context) : Interceptor {
         val json = when (path) {
             "/bets" -> loadJsonFromAssets("betsHistory.json")
             "/detail-bets" -> loadJsonFromAssets("betsDetailHistory.json")
+            "/user" -> loadJsonFromAssets("user.json")
             else -> throw IllegalArgumentException("Unknown endpoint")
         }
 

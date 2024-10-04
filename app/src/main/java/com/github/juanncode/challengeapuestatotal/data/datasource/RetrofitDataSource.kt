@@ -2,6 +2,7 @@ package com.github.juanncode.challengeapuestatotal.data.datasource
 
 import com.github.juanncode.challengeapuestatotal.domain.entity.Bet
 import com.github.juanncode.challengeapuestatotal.domain.entity.BetDetail
+import com.github.juanncode.challengeapuestatotal.domain.entity.User
 import com.github.juanncode.challengeapuestatotal.mappers.toDomain
 import com.github.juanncode.challengeapuestatotal.retrofit.ApiService
 import com.github.juanncode.challengeapuestatotal.utils.Resource
@@ -20,6 +21,12 @@ class RetrofitDataSource @Inject constructor(
     override suspend fun getDetailBets(): Resource<List<BetDetail>> {
         return  safeApiCall {
             apiService.getDetailBets().map { it.toDomain() }
+        }
+    }
+
+    override suspend fun getUser(): Resource<User> {
+        return safeApiCall {
+            apiService.getUser().map { it.toDomain() }.first()
         }
     }
 }

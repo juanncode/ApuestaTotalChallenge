@@ -4,10 +4,17 @@ import com.github.juanncode.challengeapuestatotal.domain.entity.BBSelection
 import com.github.juanncode.challengeapuestatotal.domain.entity.Bet
 import com.github.juanncode.challengeapuestatotal.domain.entity.BetDetail
 import com.github.juanncode.challengeapuestatotal.domain.entity.BetSelection
+import com.github.juanncode.challengeapuestatotal.domain.entity.User
 import com.github.juanncode.challengeapuestatotal.retrofit.model.BBSelectionModel
 import com.github.juanncode.challengeapuestatotal.retrofit.model.BetDetailModel
 import com.github.juanncode.challengeapuestatotal.retrofit.model.BetModel
 import com.github.juanncode.challengeapuestatotal.retrofit.model.BetSelectionModel
+import com.github.juanncode.challengeapuestatotal.retrofit.model.UserModel
+
+
+fun UserModel.toDomain() = User(
+    name, correo, password
+)
 
 fun BetModel.toDomain() = Bet(
     db, operation, game, createdDate = created_date, status, wager, winning, odds, type, account

@@ -1,4 +1,4 @@
-package com.github.juanncode.challengeapuestatotal.screens.components
+package com.github.juanncode.challengeapuestatotal.screens.home.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

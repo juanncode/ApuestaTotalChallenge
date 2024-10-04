@@ -5,7 +5,10 @@ import android.content.Context
 import com.github.juanncode.challengeapuestatotal.data.datasource.RemoteDataSource
 import com.github.juanncode.challengeapuestatotal.data.datasource.RetrofitDataSource
 import com.github.juanncode.challengeapuestatotal.data.repository.BetRepositoryImpl
+import com.github.juanncode.challengeapuestatotal.data.repository.UserRepositoryImpl
+import com.github.juanncode.challengeapuestatotal.domain.UserDataValidator
 import com.github.juanncode.challengeapuestatotal.domain.repository.BetRepository
+import com.github.juanncode.challengeapuestatotal.domain.repository.UserRepository
 import com.github.juanncode.challengeapuestatotal.retrofit.ApiService
 import com.github.juanncode.challengeapuestatotal.retrofit.MockInterceptor
 import dagger.Binds
@@ -51,6 +54,13 @@ class AppModule {
 
     @Provides
     @Singleton
+    fun userDataValidator(): UserDataValidator {
+        return UserDataValidator()
+    }
+
+
+    @Provides
+    @Singleton
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
@@ -75,8 +85,10 @@ abstract class DataModule {
     @Binds
     abstract fun bindRemoteDataSource(remoteDataSource: RetrofitDataSource) : RemoteDataSource
 
+    @Binds
+    abstract fun bindBetRepository(repository: BetRepositoryImpl) : BetRepository
 
     @Binds
-    abstract fun bindRepository(repository: BetRepositoryImpl) : BetRepository
+    abstract fun bindUserRepository(repository: UserRepositoryImpl) : UserRepository
 
 }

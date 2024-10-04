@@ -1,4 +1,4 @@
-package com.github.juanncode.challengeapuestatotal.screens
+package com.github.juanncode.challengeapuestatotal.screens.home
 
 import androidx.compose.foundation.text.input.TextFieldState
 import com.github.juanncode.challengeapuestatotal.domain.entity.Bet

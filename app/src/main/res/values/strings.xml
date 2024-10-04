@@ -17,4 +17,12 @@
     <string name="see_less">Ver menos</string>
     <string name="search_bet">Encuentra tu apuesta</string>
     <string name="close">Close</string>
+    <string name="result_empty">No se encontraron resultados</string>
+    <string name="show_password">Show password</string>
+    <string name="hide_password">Hide password</string>
+    <string name="password">Password</string>
+    <string name="welcome_back">Bienvenido a Bet Blue, una app para hacer seguimiento de tus apuestas estés donde estés</string>
+    <string name="hi_there">Hi there</string>
+    <string name="login">Login</string>
+    <string name="must_be_a_valid_email">Debe ser un email válido</string>
 </resources>

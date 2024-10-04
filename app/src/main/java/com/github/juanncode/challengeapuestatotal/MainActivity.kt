@@ -4,29 +4,37 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
-import com.github.juanncode.challengeapuestatotal.screens.HomeViewModel
-import com.github.juanncode.challengeapuestatotal.screens.HomeScreen
+import com.github.juanncode.challengeapuestatotal.screens.home.HomeScreen
+import com.github.juanncode.challengeapuestatotal.screens.home.HomeViewModel
+import com.github.juanncode.challengeapuestatotal.screens.login.LoginScreen
+import com.github.juanncode.challengeapuestatotal.screens.login.LoginViewModel
 import com.github.juanncode.challengeapuestatotal.ui.theme.ChallengeApuestaTotalTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private lateinit var viewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        installSplashScreen().apply {
+            setKeepOnScreenCondition {
+                viewModel.state.isLoading
+            }
+        }
         enableEdgeToEdge()
         setContent {
             ChallengeApuestaTotalTheme {
@@ -38,7 +46,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     NavHost(
                         navController = navController,
-                        startDestination = AppRouter.HomeRoute,
+                        startDestination = AppRouter.LoginRoute,
 
                         ) {
                         composable<AppRouter.HomeRoute> {
@@ -51,18 +59,16 @@ class MainActivity : ComponentActivity() {
                                 navController = navController
                             )
                         }
-//                        composable<AppRouter.DetailRoute> {
-//                            val args = it.toRoute<AppRouter.DetailRoute>()
-//                            val viewModel = hiltViewModel<DetailViewModel>()
-//                            DetailScreen(
-//                                state = viewModel.state,
-//                                onEvent = {
-//                                    viewModel.onEvent(it)
-//                                },
-//                                navController = navController,
-//                                value = args.id
-//                            )
-//                        }
+                        composable<AppRouter.LoginRoute> {
+                            val viewModel = hiltViewModel<LoginViewModel>()
+                            LoginScreen(
+                                state = viewModel.state,
+                                onEvent = {
+                                    viewModel.onEvent(it)
+                                },
+                                navController = navController,
+                            )
+                        }
                     }
                 }
             }
@@ -70,18 +76,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ChallengeApuestaTotalTheme {
-        Greeting("Android")
-    }
-}

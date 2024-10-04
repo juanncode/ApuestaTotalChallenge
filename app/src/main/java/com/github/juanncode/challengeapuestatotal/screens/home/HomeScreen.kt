@@ -1,7 +1,8 @@
 @file:OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 
-package com.github.juanncode.challengeapuestatotal.screens
+package com.github.juanncode.challengeapuestatotal.screens.home
 
+import android.widget.Toast
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -25,16 +26,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -46,6 +45,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
@@ -60,15 +60,12 @@ import com.github.juanncode.challengeapuestatotal.R
 import com.github.juanncode.challengeapuestatotal.components.GradientBackground
 import com.github.juanncode.challengeapuestatotal.domain.entity.Bet
 import com.github.juanncode.challengeapuestatotal.domain.entity.BetDetail
-import com.github.juanncode.challengeapuestatotal.screens.components.BetChip
-import com.github.juanncode.challengeapuestatotal.screens.components.BetFlexibleToolbar
-import com.github.juanncode.challengeapuestatotal.screens.components.BetSelectionCard
-import com.github.juanncode.challengeapuestatotal.screens.components.BoxText
-import com.github.juanncode.challengeapuestatotal.ui.theme.BetBlue
+import com.github.juanncode.challengeapuestatotal.screens.home.components.BetChip
+import com.github.juanncode.challengeapuestatotal.screens.home.components.BetFlexibleToolbar
+import com.github.juanncode.challengeapuestatotal.screens.home.components.BetSelectionCard
+import com.github.juanncode.challengeapuestatotal.screens.home.components.BoxText
 import com.github.juanncode.challengeapuestatotal.ui.theme.BetDarkRed
-import com.github.juanncode.challengeapuestatotal.ui.theme.BetDarkRed5
 import com.github.juanncode.challengeapuestatotal.ui.theme.BetGolden
-import com.github.juanncode.challengeapuestatotal.ui.theme.BetRed
 import com.github.juanncode.challengeapuestatotal.ui.theme.ChallengeApuestaTotalTheme
 import com.github.juanncode.challengeapuestatotal.utils.getColorByChipStatus
 import com.github.juanncode.challengeapuestatotal.utils.getColorByLevel
@@ -80,11 +77,22 @@ fun HomeScreen(
     onEvent: (HomeEvent) -> Unit,
     navController: NavController,
 ) {
+    val context = LocalContext.current
     val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
-
-
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+
+    LaunchedEffect(key1 = state.error) {
+        if (state.error != null) {
+            Toast.makeText(
+                context,
+                state.error.message,
+                Toast.LENGTH_LONG
+            ).show()
+            onEvent(HomeEvent.CleanError)
+        }
+    }
+
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
 
@@ -125,6 +133,15 @@ fun HomeScreen(
 
                 ) {
 
+                    if (state.loading.not() && state.bets.isEmpty()) {
+                        item {
+                            Text(
+                                modifier = Modifier.padding(vertical = 20.dp),
+                                text = stringResource(id = R.string.result_empty),
+                                fontWeight = FontWeight.SemiBold,
+                            )
+                        }
+                    }
                     items(
                         state.bets,
                         key = { it.game }
@@ -257,10 +274,13 @@ fun BetItem(modifier: Modifier, bet: Bet, betDetail: BetDetail) {
                             )
                         ),
                 ) {
-                    Text(text = stringResource(id = if (!expandedState) R.string.see_more else R.string.see_less), color = Color.White)
+                    Text(
+                        text = stringResource(id = if (!expandedState) R.string.see_more else R.string.see_less),
+                        color = Color.White
+                    )
                     Spacer(modifier = Modifier.width(5.dp))
                     Icon(
-                        painter = painterResource(id =  if (!expandedState) R.drawable.keyboard_arrow_down else R.drawable.keyboard_arrow_up),
+                        painter = painterResource(id = if (!expandedState) R.drawable.keyboard_arrow_down else R.drawable.keyboard_arrow_up),
                         contentDescription = stringResource(
                             id = if (expandedState) R.string.keyboard_arrow_down else R.string.keyboard_arrow_up
 
