@@ -1,4 +1,3 @@
-@file:OptIn(ExperimentalFoundationApi::class)
 
 package com.github.juanncode.challengeapuestatotal.components
 

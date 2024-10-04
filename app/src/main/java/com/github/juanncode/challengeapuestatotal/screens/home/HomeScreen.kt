@@ -1,13 +1,11 @@
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.github.juanncode.challengeapuestatotal.screens.home
 
 import android.widget.Toast
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -113,7 +111,7 @@ fun HomeScreen(
             )
         }
     ) {
-        GradientBackground() {
+        GradientBackground {
             Box(
                 Modifier
                     .fillMaxSize()
@@ -189,9 +187,7 @@ private fun HomeScreenPreview() {
 @Composable
 fun BetItem(modifier: Modifier, bet: Bet, betDetail: BetDetail) {
     var expandedState by remember { mutableStateOf(false) }
-    val rotationState by animateFloatAsState(
-        targetValue = if (expandedState) 180f else 0f
-    )
+
     Surface(
         modifier = modifier
             .fillMaxWidth()

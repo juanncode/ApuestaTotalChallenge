@@ -104,7 +104,7 @@ fun BetFlexibleToolbar(
                         ),
                     )
                     Spacer(modifier = Modifier.width(3.dp))
-                    Text(text = "Carlos", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+                    Text(text = "TestName", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
                 }
             }
             Row(
